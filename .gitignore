@@ -1,0 +1,14 @@
+data/*.json
+node_modules/
+dist/
+runtime/
+logs/
+ChaosOne_img/
+docs/GITHUB-PUBLISH.md
+docs/RECOVERY-*.md
+installer/build-*-installer.ps1
+*.log
+*.exe
+*.psd
+*.pfx
+*.p12
