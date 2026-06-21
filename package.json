@@ -1,0 +1,19 @@
+{
+  "name": "chaosone",
+  "version": "0.1.0",
+  "description": "Local-first AI assistant shell for Windows with Ollama and optional cloud providers.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/achaosX/ChaosOne.git"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
+
