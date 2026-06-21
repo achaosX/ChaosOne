@@ -1,0 +1,166 @@
+{
+  "updatedAt": "2026-06-19",
+  "providers": [
+    {
+      "id": "ollama",
+      "name": "Chaos Local",
+      "shortName": "Local",
+      "mode": "local",
+      "status": "ready",
+      "description": "Ejecuta modelos en este PC con Ollama. Recomendado para privacidad.",
+      "baseUrl": "http://localhost:11434",
+      "models": [
+        {
+          "id": "tinyllama",
+          "name": "TinyLlama",
+          "downloadUrl": "https://ollama.com/library/tinyllama",
+          "tags": ["local", "mini", "privado", "primer arranque"]
+        },
+        {
+          "id": "qwen2.5:0.5b",
+          "name": "Qwen 2.5 0.5B",
+          "downloadUrl": "https://ollama.com/library/qwen2.5:0.5b",
+          "tags": ["local", "ligero", "multilingue", "privado"]
+        },
+        {
+          "id": "llama3.2:1b",
+          "name": "Llama 3.2 1B",
+          "downloadUrl": "https://ollama.com/library/llama3.2:1b",
+          "tags": ["local", "general", "privado"]
+        },
+        {
+          "id": "llama3.2:3b",
+          "name": "Llama 3.2 3B",
+          "downloadUrl": "https://ollama.com/library/llama3.2:3b",
+          "tags": ["local", "general", "mejor calidad", "privado"]
+        },
+        {
+          "id": "qwen2.5-coder:3b",
+          "name": "Qwen 2.5 Coder 3B",
+          "downloadUrl": "https://ollama.com/library/qwen2.5-coder",
+          "tags": ["local", "codigo", "privado"]
+        }
+      ]
+    },
+    {
+      "id": "openai",
+      "name": "OpenAI",
+      "shortName": "OpenAI",
+      "mode": "cloud",
+      "status": "ready",
+      "apiKeyEnv": "OPENAI_API_KEY",
+      "description": "Modelos GPT modernos. Alta calidad, usa API key y envia datos al proveedor.",
+      "models": [
+        {
+          "id": "gpt-5.5",
+          "name": "GPT-5.5",
+          "tags": ["cloud", "top", "actual"]
+        },
+        {
+          "id": "gpt-5.4-mini",
+          "name": "GPT-5.4 mini",
+          "tags": ["cloud", "rapido", "actual"]
+        },
+        {
+          "id": "gpt-4.1-mini",
+          "name": "GPT-4.1 mini",
+          "tags": ["cloud", "rapido", "coste bajo"]
+        },
+        {
+          "id": "gpt-4.1",
+          "name": "GPT-4.1",
+          "tags": ["cloud", "calidad", "codigo"]
+        }
+      ]
+    },
+    {
+      "id": "anthropic",
+      "name": "Anthropic Claude",
+      "shortName": "Claude",
+      "mode": "cloud",
+      "status": "ready",
+      "apiKeyEnv": "ANTHROPIC_API_KEY",
+      "description": "Modelos Claude mediante la Messages API. Requiere API key de Anthropic.",
+      "models": [
+        {
+          "id": "claude-sonnet-4-6",
+          "name": "Claude Sonnet 4.6",
+          "tags": ["cloud", "razonamiento"]
+        },
+        {
+          "id": "claude-opus-4-8",
+          "name": "Claude Opus 4.8",
+          "tags": ["cloud", "top"]
+        },
+        {
+          "id": "claude-fable-5",
+          "name": "Claude Fable 5",
+          "tags": ["cloud", "frontier"]
+        }
+      ]
+    },
+    {
+      "id": "gemini",
+      "name": "Google Gemini",
+      "shortName": "Gemini",
+      "mode": "cloud",
+      "status": "ready",
+      "apiKeyEnv": "GEMINI_API_KEY",
+      "description": "Modelos Gemini via generateContent. Requiere API key de Google AI Studio.",
+      "models": [
+        {
+          "id": "gemini-2.5-flash",
+          "name": "Gemini 2.5 Flash",
+          "tags": ["cloud", "rapido", "multimodal"]
+        },
+        {
+          "id": "gemini-2.5-pro",
+          "name": "Gemini 2.5 Pro",
+          "tags": ["cloud", "razonamiento"]
+        },
+        {
+          "id": "gemini-3.1-pro-preview",
+          "name": "Gemini 3.1 Pro Preview",
+          "tags": ["cloud", "preview", "codigo"]
+        }
+      ]
+    },
+    {
+      "id": "mistral-cloud",
+      "name": "Mistral AI",
+      "shortName": "Mistral",
+      "mode": "cloud",
+      "status": "ready",
+      "apiKeyEnv": "MISTRAL_API_KEY",
+      "description": "Modelos cloud de Mistral via Chat Completions. Requiere API key de Mistral.",
+      "models": [
+        {
+          "id": "mistral-medium-latest",
+          "name": "Mistral Medium latest",
+          "tags": ["cloud", "europeo"]
+        },
+        {
+          "id": "mistral-small-latest",
+          "name": "Mistral Small latest",
+          "tags": ["cloud", "rapido", "europeo"]
+        }
+      ]
+    },
+    {
+      "id": "mock",
+      "name": "Modo demo",
+      "shortName": "Demo",
+      "mode": "local",
+      "status": "ready",
+      "description": "Prueba ChaosOne sin creditos ni modelo real.",
+      "models": [
+        {
+          "id": "mock-local",
+          "name": "Demo local",
+          "tags": ["local", "demo", "gratis"]
+        }
+      ]
+    }
+  ]
+}
+
