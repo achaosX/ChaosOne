@@ -1,0 +1,455 @@
+﻿<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ChaosOne</title>
+    <link rel="icon" href="/assets/favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <img class="brand-logo" src="/assets/logo.png" alt="ChaosOne" />
+          <button id="collapseSidebar" class="collapse-sidebar" type="button" aria-label="Esconder menu">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+          </button>
+        </div>
+
+        <nav class="primary-nav" aria-label="Navegacion principal">
+          <button class="active" data-view="chat">
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z" /></svg></span>
+            Chat
+          </button>
+          <button data-view="projects">
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /></svg></span>
+            Proyectos
+          </button>
+          <button data-view="agents">
+            <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 8V4M8 4h8M6 10h12v8H6z" /><path d="M9 14h.01M15 14h.01M3 13h3M18 13h3" /></svg></span>
+            Agentes
+          </button>
+        </nav>
+
+        <section class="chat-history" aria-label="Historial de chats">
+          <div class="history-head">
+            <span>Historial</span>
+            <button id="deleteAllChats" type="button" title="Borrar todos los chats">Limpiar</button>
+          </div>
+          <div id="historyList" class="history-list"></div>
+        </section>
+
+        <div class="profile-card">
+          <div id="profileInitial" class="avatar">N</div>
+          <div>
+            <strong id="profileName">Usuario</strong>
+            <span id="profileSubline">Perfil local</span>
+          </div>
+          <button class="settings-shortcut" type="button" data-view-button="brain" aria-label="Abrir ajustes">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5A3.5 3.5 0 1 0 12 8a3.5 3.5 0 0 0 0 7.5Z" /><path d="m19.4 15 .1 2.2-2.1 1.2-1.9-1a7.8 7.8 0 0 1-2 .8L13 20h-2l-.5-1.8a7.8 7.8 0 0 1-2-.8l-1.9 1-2.1-1.2.1-2.2a7.8 7.8 0 0 1-1-1.7L2 12l1.6-1.3a7.8 7.8 0 0 1 1-1.7l-.1-2.2 2.1-1.2 1.9 1a7.8 7.8 0 0 1 2-.8L11 4h2l.5 1.8a7.8 7.8 0 0 1 2 .8l1.9-1 2.1 1.2-.1 2.2a7.8 7.8 0 0 1 1 1.7L22 12l-1.6 1.3a7.8 7.8 0 0 1-1 1.7Z" /></svg>
+          </button>
+        </div>
+      </aside>
+      <button id="openSidebar" class="open-sidebar" type="button" aria-label="Mostrar menu">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" /></svg>
+      </button>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <h1>Hola, <span id="greetingName">Usuario</span></h1>
+            <p>Que quieres crear hoy?</p>
+          </div>
+          <div class="top-actions">
+            <div id="statusPill" class="status-pill local">Local-first</div>
+            <button id="newChat" class="new-chat" type="button">Nuevo chat <span>+</span></button>
+            <button id="toggleInspector" class="context-toggle" type="button" aria-expanded="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 21v-7" /><path d="M4 10V3" /><path d="M12 21v-9" /><path d="M12 8V3" /><path d="M20 21v-5" /><path d="M20 12V3" /><path d="M2 14h4" /><path d="M10 8h4" /><path d="M18 16h4" /></svg>
+              Contexto
+            </button>
+            <button id="toggleTheme" class="icon-button" type="button" aria-label="Cambiar tema">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v2M12 19v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M3 12h2M19 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" /><path d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" /></svg>
+            </button>
+            <div id="userInitial" class="user-bubble">N<span></span></div>
+          </div>
+        </header>
+
+        <div id="chat" class="view active dashboard-grid">
+          <section id="heroPanel" class="hero-panel">
+            <div class="chat-scroll">
+              <article class="welcome">
+                <img class="hero-logo" src="/assets/icon.png" alt="" />
+                <h2>Tu asistente IA para crear sin limites</h2>
+                <p>ChaosOne entiende tu proyecto, escribe codigo, ejecuta comandos y entrega resultados.</p>
+                <div class="trust-strip" aria-label="Principios de ChaosOne">
+                  <span>Local-first</span>
+                  <span>Cloud opcional</span>
+                  <span>Control del dato</span>
+                </div>
+              </article>
+
+              <div id="messages" class="messages" aria-live="polite"></div>
+
+              <div id="starterContent" class="starter-content">
+                <div class="quick-actions">
+                  <button type="button" data-prompt="Quiero crear una aplicacion nueva desde cero. Ayudame a definir el MVP.">
+                    <span class="action-icon purple">+</span>
+                    <strong>Crear aplicacion</strong>
+                    <small>Inicia un proyecto desde cero</small>
+                  </button>
+                  <button type="button" data-prompt="Ayudame a corregir un bug. Primero dime que informacion necesitas.">
+                    <span class="action-icon green">bug</span>
+                    <strong>Corregir bug</strong>
+                    <small>Detecta y soluciona problemas</small>
+                  </button>
+                  <button type="button" data-prompt="Analiza este proyecto y dime que mejorarias primero.">
+                    <span class="action-icon blue">?</span>
+                    <strong>Analizar proyecto</strong>
+                    <small>Entiende el codigo y propone mejoras</small>
+                  </button>
+                  <button type="button" data-prompt="Ayudame a automatizar una tarea repetitiva.">
+                    <span class="action-icon orange">bolt</span>
+                    <strong>Automatizar tarea</strong>
+                    <small>Convierte rutina en flujo automatico</small>
+                  </button>
+                </div>
+
+                <section class="recent">
+                  <div class="section-title">
+                    <h3>Chats recientes</h3>
+                    <button type="button" data-view-button="chat">En la barra lateral</button>
+                  </div>
+                  <div id="recentList" class="recent-list"></div>
+                </section>
+              </div>
+            </div>
+
+            <form id="chatForm" class="composer">
+              <div id="contextTray" class="context-tray" hidden></div>
+              <input id="messageInput" autocomplete="off" placeholder="Pregunta cualquier cosa..." />
+              <input id="fileInput" type="file" multiple hidden />
+              <div class="composer-row">
+                <div class="composer-tools">
+                  <button id="attachFiles" type="button" aria-label="Adjuntar documentos">+</button>
+                  <button id="insertMention" type="button" aria-label="Mencionar contexto">@</button>
+                  <button id="addLinkContext" type="button" aria-label="Anadir enlace">link</button>
+                  <button id="formatCode" type="button" aria-label="Codigo">&lt;/&gt;</button>
+                </div>
+                <button id="agentSelect" class="agent-select" type="button">Agente: ChaosOne <span>v</span></button>
+                <button class="send-button" type="submit" aria-label="Enviar">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4z" /><path d="M22 2 11 13" /></svg>
+                </button>
+              </div>
+            </form>
+            <p class="fine-print">ChaosOne puede cometer errores. Verifica la informacion importante.</p>
+          </section>
+
+          <aside class="inspector">
+            <div class="drawer-head">
+              <strong>Contexto</strong>
+              <button id="closeInspector" type="button" aria-label="Cerrar panel">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18" /><path d="m6 6 12 12" /></svg>
+              </button>
+            </div>
+            <section class="side-card">
+              <h3>Agente activo</h3>
+              <div class="agent-card">
+                <img class="agent-avatar" src="/assets/icon.png" alt="" />
+                <div>
+                  <strong>ChaosOne</strong>
+                  <p>Asistente principal para desarrollo de software y automatizacion.</p>
+                </div>
+                <span>General</span>
+              </div>
+              <button id="changeAgent" type="button">Cambiar agente</button>
+            </section>
+
+            <section class="side-card">
+              <h3>Estado del sistema</h3>
+              <dl class="compact-status">
+                <dt>Gateway</dt>
+                <dd id="gatewayStatus">Conectando</dd>
+                <dt>MCP Servers</dt>
+                <dd id="mcpStatus">Local</dd>
+                <dt>Modelo</dt>
+                <dd id="modelStatus">-</dd>
+                <dt>Version</dt>
+                <dd id="appVersion">-</dd>
+              </dl>
+              <button type="button" data-view-button="status">Ver detalles</button>
+            </section>
+
+            <section class="side-card">
+              <h3>Proyecto actual</h3>
+              <div class="project-head">
+                <img src="/assets/icon.png" alt="" />
+                <strong>ChaosOne MVP</strong>
+                <button id="changeProject" type="button">Cambiar</button>
+              </div>
+              <dl class="compact-status">
+                <dt>Archivos</dt>
+                <dd id="projectFileCount">-</dd>
+                <dt>Ultima actividad</dt>
+                <dd id="projectActivity">-</dd>
+                <dt>Estado</dt>
+                <dd class="positive">Desarrollo</dd>
+              </dl>
+              <button id="openProject" type="button">Abrir proyecto</button>
+            </section>
+          </aside>
+        </div>
+
+        <section id="setup" class="view page-view">
+          <div class="panel">
+            <h2>Primer arranque</h2>
+            <p class="muted">Prepara ChaosOne sin tocar archivos tecnicos.</p>
+            <div id="setupChecklist" class="checklist"></div>
+          </div>
+          <div class="panel">
+            <h2>Importar OpenClaw</h2>
+            <p class="muted">Copia la identidad local actual de OpenClaw hacia ChaosOne. No modifica el origen.</p>
+            <div id="openClawSummary" class="summary"></div>
+            <button id="importOpenClaw" type="button">Importar identidad</button>
+          </div>
+          <div class="panel local-brain-panel">
+            <h2>Cerebro local</h2>
+            <p class="muted">Prepara un modelo local para que ChaosOne arranque usable sin cloud.</p>
+            <div id="localRuntimeSummary" class="summary"></div>
+            <label>
+              Modelo recomendado
+              <select id="localModelSelect"></select>
+            </label>
+            <div class="button-row two">
+              <button id="checkLocalRuntime" type="button" class="secondary">Comprobar runtime</button>
+              <button id="pullLocalModel" type="button" class="primary-action">Descargar modelo</button>
+            </div>
+            <a class="download-link" href="https://ollama.com/download/windows" target="_blank" rel="noreferrer">Descargar runtime local para Windows</a>
+            <pre id="localRuntimeOutput" class="command-output">Estado pendiente.</pre>
+          </div>
+        </section>
+
+        <section id="projects" class="view page-view">
+          <div class="panel">
+            <h2>Proyectos</h2>
+            <p class="muted">Workspace local activo de ChaosOne.</p>
+            <div id="projectSummary" class="summary"></div>
+            <div id="projectFiles" class="file-list"></div>
+          </div>
+          <div class="panel file-editor-panel">
+            <h2>Archivo</h2>
+            <p id="fileEditorStatus" class="muted">Selecciona un archivo del proyecto.</p>
+            <label class="command-label">
+              Ruta
+              <input id="filePathInput" autocomplete="off" placeholder="web/app.js" />
+            </label>
+            <div class="button-row two compact-row">
+              <button id="openFile" type="button" class="secondary">Abrir archivo</button>
+              <button id="useFileInChat" type="button" class="secondary">Usar en chat</button>
+            </div>
+            <textarea id="fileEditor" class="file-editor" spellcheck="false" placeholder="El contenido aparecera aqui"></textarea>
+            <button id="saveFile" type="button" class="primary-action">Guardar cambios</button>
+          </div>
+          <div class="panel">
+            <h2>Procesos locales</h2>
+            <p class="muted">Ejecuta comandos dentro del workspace si el permiso esta activado.</p>
+            <label class="command-label">
+              Comando PowerShell
+              <input id="commandInput" autocomplete="off" placeholder="npm run start" />
+            </label>
+            <button id="runCommand" type="button" class="primary-action">Ejecutar proceso</button>
+            <pre id="commandOutput" class="command-output">Permiso requerido: ejecutar procesos.</pre>
+            <div class="command-history-head">
+              <h3>Historial de comandos</h3>
+              <button id="clearCommandHistory" type="button" class="secondary">Limpiar</button>
+            </div>
+            <div id="commandHistory" class="command-history"></div>
+          </div>
+        </section>
+
+        <section id="agents" class="view page-view">
+          <div class="panel">
+            <h2>Agentes</h2>
+            <p class="muted">Agente disponible para este MVP.</p>
+            <div class="agent-list">
+              <article class="agent-row active">
+                <img class="agent-avatar" src="/assets/icon.png" alt="" />
+                <div>
+                  <strong>ChaosOne</strong>
+                  <p>Asistente principal local-first para desarrollo, automatizacion y gestion de contexto.</p>
+                </div>
+                <span>Activo</span>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="personality" class="view page-view">
+          <div class="panel">
+            <h2>Personalidad</h2>
+            <dl id="personalityDetails"></dl>
+          </div>
+        </section>
+
+        <section id="brain" class="view page-view">
+          <div class="panel settings-panel">
+            <h2>Cerebro</h2>
+            <div id="privacyBanner" class="privacy-banner local">
+              <strong>Modo privado</strong>
+              <span>Los datos se quedan en este equipo cuando usas Chaos Local.</span>
+            </div>
+
+            <div class="section-title brain-title">
+              <h3>Elige proveedor</h3>
+              <span id="activeProviderLabel" class="provider-pill">-</span>
+            </div>
+            <div id="providerGrid" class="provider-grid"></div>
+
+            <label>
+              Modelo
+              <select id="modelSelect"></select>
+            </label>
+
+            <div id="providerDetails" class="provider-details"></div>
+            <button id="applyBrain" type="button" class="primary-action">Activar cerebro seleccionado</button>
+
+            <h2 class="settings-subtitle">Ajustes avanzados</h2>
+            <label>
+              Proveedor
+              <input id="providerInput" />
+            </label>
+            <label>
+              Modelo
+              <input id="modelInput" />
+            </label>
+            <label>
+              Variable de API key
+              <input id="apiKeyEnvInput" />
+            </label>
+            <label>
+              API key del proveedor seleccionado
+              <input id="apiKeyInput" type="password" autocomplete="off" placeholder="Pega aqui la clave del proveedor activo" />
+            </label>
+            <div class="button-row">
+              <button id="saveConfig" type="button">Guardar configuracion</button>
+              <button id="saveApiKey" type="button" class="secondary">Guardar API key cifrada</button>
+              <button id="deleteApiKey" type="button" class="danger">Borrar API key local</button>
+            </div>
+            <div class="button-row two">
+              <button id="enableLocalMode" type="button" class="secondary">Usar cerebro local</button>
+              <button id="enableMockMode" type="button" class="secondary">Probar sin creditos</button>
+            </div>
+            <div class="button-row single">
+              <button id="deleteAllChatsSettings" type="button" class="danger">Borrar todo el historial</button>
+            </div>
+            <p id="secretStatus" class="notice"></p>
+            <p class="notice">Modo local usa Ollama en http://localhost:11434 y no necesita API key. ChaosOne guarda la clave cloud cifrada con Windows DPAPI en tu usuario local.</p>
+
+            <h2 class="settings-subtitle">Permisos</h2>
+            <div id="permissionsGrid" class="permissions-grid">
+              <label class="permission-row">
+                <input id="permReadDocs" type="checkbox" />
+                <span>
+                  <strong>Leer documentos adjuntos</strong>
+                  <small>Permite usar archivos que anadas al chat como contexto.</small>
+                </span>
+              </label>
+              <label class="permission-row">
+                <input id="permFetchUrls" type="checkbox" />
+                <span>
+                  <strong>Leer URLs</strong>
+                  <small>Permite descargar paginas para usarlas como contexto.</small>
+                </span>
+              </label>
+              <label class="permission-row">
+                <input id="permCloud" type="checkbox" />
+                <span>
+                  <strong>Usar proveedores cloud</strong>
+                  <small>Permite enviar chats a OpenAI, Claude, Gemini o Mistral.</small>
+                </span>
+              </label>
+              <label class="permission-row">
+                <input id="permImportIdentity" type="checkbox" />
+                <span>
+                  <strong>Importar identidad OpenClaw</strong>
+                  <small>Permite copiar identidad local hacia ChaosOne.</small>
+                </span>
+              </label>
+              <label class="permission-row">
+                <input id="permSaveKeys" type="checkbox" />
+                <span>
+                  <strong>Guardar API keys cifradas</strong>
+                  <small>Permite almacenar claves con Windows DPAPI.</small>
+                </span>
+              </label>
+              <label class="permission-row dangerous-permission">
+                <input id="permExecuteProcesses" type="checkbox" />
+                <span>
+                  <strong>Ejecutar procesos locales</strong>
+                  <small>Permite lanzar comandos PowerShell desde ChaosOne. Desactivado por defecto.</small>
+                </span>
+              </label>
+              <label class="permission-row">
+                <input id="permReadWorkspaceFiles" type="checkbox" />
+                <span>
+                  <strong>Leer archivos del proyecto</strong>
+                  <small>Permite abrir archivos dentro del workspace permitido.</small>
+                </span>
+              </label>
+              <label class="permission-row dangerous-permission">
+                <input id="permWriteWorkspaceFiles" type="checkbox" />
+                <span>
+                  <strong>Editar archivos del proyecto</strong>
+                  <small>Permite guardar cambios en archivos del workspace permitido, siempre con confirmacion.</small>
+                </span>
+              </label>
+            </div>
+            <label>
+              Workspace permitido
+              <input id="allowedProjectRootInput" readonly />
+            </label>
+            <label>
+              Timeout de proceso local
+              <input id="commandTimeoutInput" type="number" min="1000" max="60000" step="1000" />
+            </label>
+            <button id="savePermissions" type="button" class="primary-action">Guardar permisos</button>
+            <p id="permissionsStatus" class="notice"></p>
+          </div>
+        </section>
+
+        <section id="status" class="view page-view">
+          <div class="panel">
+            <h2>Estado</h2>
+            <pre id="statusJson"></pre>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <div id="confirmDialog" class="confirm-backdrop" hidden>
+      <section class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+        <h2 id="confirmTitle">Confirmar accion</h2>
+        <p id="confirmMessage"></p>
+        <div class="confirm-actions">
+          <button id="confirmCancel" type="button" class="secondary">Cancelar</button>
+          <button id="confirmAccept" type="button" class="danger">Borrar</button>
+        </div>
+      </section>
+    </div>
+
+    <div id="textDialog" class="confirm-backdrop" hidden>
+      <section class="confirm-card" role="dialog" aria-modal="true" aria-labelledby="textDialogTitle">
+        <h2 id="textDialogTitle">Anadir contexto</h2>
+        <p id="textDialogMessage"></p>
+        <input id="textDialogInput" class="dialog-input" autocomplete="off" />
+        <div class="confirm-actions">
+          <button id="textDialogCancel" type="button" class="secondary">Cancelar</button>
+          <button id="textDialogAccept" type="button">Anadir</button>
+        </div>
+      </section>
+    </div>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
+
